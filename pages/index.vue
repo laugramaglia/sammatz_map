@@ -1,5 +1,8 @@
 <template>
-  <Map/>
+  <div>
+    <Map/>
+    <FilterBar />
+  </div>
 </template>
 
 <script>
