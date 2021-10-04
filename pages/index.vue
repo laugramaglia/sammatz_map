@@ -1,7 +1,7 @@
 <template>
   <div>
     <Map/>
-    <FilterBar />
+    <FilterBar/>
   </div>
 </template>
 
