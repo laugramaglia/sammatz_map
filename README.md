@@ -14,6 +14,11 @@ https://github.com/bramus/photoshop-google-maps-tile-cutter/
 2) Compress images ( i use [pngyu](https://nukesaq88.github.io/Pngyu/) )
 
 
+## Deployment
+
+### `Heroku`
+
+Deploy Nuxt on Herocu (https://vueschool.io/lessons/how-to-deploy-nuxtjs-to-heroku?friend=nuxt)
 
 
 # Nuxt
