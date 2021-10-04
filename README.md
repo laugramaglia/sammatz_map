@@ -1,6 +1,22 @@
-# 
+# Instructions
 
-# nuxt_map
+## Image Generator
+
+1) Download and install photoshop-google-maps-tile-cutter
+
+```bash
+# copie from git repositorie
+$ git clone https://github.com/bramus/photoshop-google-maps-tile-cutter.git
+```
+### `Instructions to export tile image`
+https://github.com/bramus/photoshop-google-maps-tile-cutter/
+
+2) Compress images ( i use [pngyu](https://nukesaq88.github.io/Pngyu/) )
+
+
+
+
+# Nuxt
 
 ## Build Setup
 
