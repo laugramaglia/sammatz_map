@@ -1,33 +1,52 @@
 <template>
   <div class="filter-bar" :class="{ active: isActive }">
-    <a-row :gutter="[16, 16]">
+    <a-row
+      :gutter="[4, 4]"
+      type="flex"
+      class="row-class"
+      v-for="(me, index) in groupsFilter"
+      :key="me.name"
+    >
       <a-col
         class="hidden-col"
-        v-for="(me, index) in groupsFilter"
-        :key="me.name"
-        :span="8"
+        flex="auto"
         justify="center"
-        align="center"
+        align="right"
+        @click="onClick(index)"
+      >
+        <h2 class="filtered-text">{{ me.name }}</h2>
+      </a-col>
+      <a-col
+        class="hidden-col"
+        flex="45px"
+        justify="center"
+        align="right"
+        @click="onClick(index)"
       >
         <div
           class="filtered-icons"
-          @click="onClick(index)"
           :style="{ backgroundColor: me.color }"
         ></div>
       </a-col>
     </a-row>
-    <div class="position-menu-hamburguer"  @click="onClikOpen">
-      <Lottie :autoplay="false" :loop="false" :data="animationData" :height="40" :width="40"></Lottie>
+    <div class="position-menu-hamburguer" @click="onClikOpen">
+      <Lottie
+        :autoplay="false"
+        :loop="false"
+        :data="animationData"
+        :height="40"
+        :width="40"
+      ></Lottie>
     </div>
   </div>
 </template>
 <script>
-    import lottie from './lottie.vue'
-    import animationData from '../static/8876-menu-to-close.json'
+import lottie from "./lottie.vue";
+import animationData from "../static/8876-menu-to-close.json";
 export default {
-  components:{
-    lottie
-},
+  components: {
+    lottie,
+  },
   props: {
     groupsFilter: Array,
   },
@@ -41,21 +60,20 @@ export default {
     onClick(item) {
       this.$emit("onTap", item);
     },
-    onClikOpen(){
-      this.isActive = !this.isActive
+    onClikOpen() {
+      this.isActive = !this.isActive;
       // this.lottie.play([0,60], true)
-    }
+    },
   },
   computed: {
-      lottie () {
-          return this.$refs.lottie
-      }
-  }
+    lottie() {
+      return this.$refs.lottie;
+    },
+  },
 };
 </script>
 <style lang="scss">
 $padding-box: 12px;
-$open-size: 177px;
 $box-size: 40px;
 .filter-bar {
   position: absolute;
@@ -63,10 +81,31 @@ $box-size: 40px;
   padding: $padding-box;
   right: 20px;
   z-index: 999;
-  transition: 0.3s;
-  width: $box-size + $padding-box * 2;
-  height: $box-size + $padding-box * 2;
+  transition: 0.4s;
+  width: 260px;
+
   overflow: hidden;
+  height: auto;
+  min-height: $box-size + $padding-box * 2;
+
+  .row-class {
+    margin-bottom: 0;
+    transition: 0.3s;
+    cursor: pointer;
+    background-color: white;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.36s ease;
+
+    .filtered-icons,
+    .filtered-text {
+      transition: 0.4s;
+      height: 0;
+      width: 0;
+      font-size: 0;
+      overflow: hidden;
+    }
+  }
   .position-menu-hamburguer {
     position: absolute;
     bottom: $padding-box;
@@ -75,28 +114,25 @@ $box-size: 40px;
     height: $box-size;
     width: $box-size;
     cursor: pointer;
-    div{
+    div {
       transform: scale(2.5);
     }
   }
 
-  .filtered-icons {
-    transition: 0.4s;
-    height: 0;
-    width: 0;
-    background-color: orange;
-    cursor: pointer;
-  }
-
   &.active {
-    width: $open-size;
-    height: $open-size;
+    .row-class {
+      margin-bottom: 52px !important;
+      transform: scaleY(1);
+    }
 
     .filtered-icons {
-      height: $box-size;
-      width: $box-size;
-      background-color: orange;
-      cursor: pointer;
+      height: 100%;
+      width: 100%;
+    }
+    .filtered-text {
+      height: 100%;
+      width: 100%;
+      font-size: 21px;
     }
   }
 }

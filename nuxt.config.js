@@ -19,6 +19,11 @@ export default {
     ]
   },
 
+  // Server middleware
+  serverMiddleware: [
+    {path: '/api', handler: '~/api/index'}
+  ],
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'ant-design-vue/dist/antd.css'
