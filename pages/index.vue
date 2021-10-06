@@ -18,6 +18,9 @@
             :key="mark.name"
             :visible="dataMark.visible"
           >
+          <!-- show name always -->
+          <l-tooltip   :options="{permanent: true, className: 'tooltip-custom' }" >{{mark.name}}!</l-tooltip>
+          <!-- custom icon -->
             <l-icon
               :icon-size="[22, 37]"
               :icon-anchor="[16, 37]"
@@ -38,6 +41,11 @@
           :lat-lngs="polylineBlue.latlngs"
           :color="polylineBlue.color"
         ></l-polyline>
+        <l-polyline
+          :lat-lngs="polylineRed.latlngs"
+          :color="polylineRed.color"
+        ></l-polyline>
+        
       </l-map>
     </client-only>
     <!-- bottom right menu -->
@@ -46,7 +54,7 @@
 </template>
 <script>
 import dataGroups from "../api/data"
-import bluePath from "static/data/path.js"
+import { bluePath, redPath } from "static/data/path.js"
 
 export default {
   data() {
@@ -56,6 +64,10 @@ export default {
       polylineBlue: {
         latlngs: bluePath,
         color: "violet",
+      },
+      polylineRed: {
+        latlngs: redPath,
+        color: "orange",
       },
     };
   },
@@ -77,6 +89,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.tooltip-custom{
+  background-color: rgba($color: white, $alpha: .6) !important;
+  border-radius: 0 ;
+  border: none ;
+}
 button.button {
   position: absolute;
   bottom: 100px;
