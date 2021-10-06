@@ -1,7 +1,7 @@
 <template>
   <div id="map-wrap" style="height: 100vh">
     <client-only>
-      <l-map :center="[-73.038223, 57.32872]" :zoom="3" :minZoom="2" :maxZoom="4" :maxBoundsViscosity="1.0" @click="mapClick">
+      <l-map :center="[-50.466683, 43.683701]" :zoom="4" :minZoom="2" :maxZoom="7" :maxBoundsViscosity="1.0" @click="mapClick">
         <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true"></l-tile-layer>
         <div v-for="dataMark in dataGroups" :key="dataMark.router">
           <l-marker
@@ -9,15 +9,19 @@
           :lat-lng="[mark.lat, mark.lng]"
           :key="mark.name"
           :visible="dataMark.visible"
+          
         >
         <l-icon
           :icon-size="[22, 37]"
           :icon-anchor="[16, 37]"
-          icon-url="/orange-marker.png" >
+          :icon-url='"/markers/"+dataMark.color+".svg"'
+         >
 </l-icon>
           <PopUpEdited 
           :title="mark.name" 
           :description="mark.description"
+          :link="mark.link"
+          :img="mark.img"
           />
         </l-marker>
         </div>

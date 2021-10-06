@@ -10,8 +10,9 @@
           <div class="text-content">
             <h2>{{ title }}</h2>
             <p>
-              {{ description }}
+              {{ description }} <strong><a :href='"https://michaelshof-sammatz.de/blog/"+link' target="_blank" >Read more...</a></strong>
             </p>
+
           </div>
         </a-col>
       </a-row>
@@ -19,7 +20,7 @@
 </template>
 <script>
 export default {
-  props: ["title", "description", "img"],
+  props: ["title", "description", "img", "link"],
 };
 </script>
 <style lang="scss">

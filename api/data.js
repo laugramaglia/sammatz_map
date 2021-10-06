@@ -2,15 +2,29 @@ import GroupClass from '../static/classes/groupsClass'
 import MarkerClass from '../static/classes/markerClass'
 
  const visitUsMarker = [
-       new MarkerClass("Blue house", "House of houndred of volunteeers", -78.647995, 55.203552)
+       new MarkerClass("Cafe", "Take something to go", -36.879621, 45.263672, ""),
+       new MarkerClass("Arche Hof", "Arche farm", -57.04073, 64.423828, ""),
+       new MarkerClass("Hofladen", "House of ...", -59.327892, 64.445028, ""),
+       new MarkerClass("Spielplatz", "Kids paradice", -57.309929, 82.204943, ""),
   ]
 
   const arbeitsbereicheMarker = [
-    
+    new MarkerClass("Meierei", "Take something to go", -54.585095, 60.930262, ""),
+    new MarkerClass("Bäckerei", "Arche farm", -54.684004, 76.484671, ""),
+    // new MarkerClass("Eichenhof", "House of ...", -59.327892, 64.445028, ""),
+    // new MarkerClass("Küche", "Kids paradice", -57.309929, 82.204943, ""),
+
 ]
 
 const gartensMarker = [
-    
+  new MarkerClass("Rosengarten", "Take something to go", -46.862069, 42.995467, ""),
+    new MarkerClass("Waldsee", "Arche farm", -54.470038, 15.556641, ""),
+    new MarkerClass("Arena", "House of ...", -6.35761, 46.165237, ""),
+    new MarkerClass("Staudenplateau", "Kids paradice", -7.947717, 29.809513, ""),
+    new MarkerClass("Campus-Garten", "Take something to go", -55.052318, 49.652367, ""),
+    new MarkerClass("Dahliengarten", "Arche farm", -12.806068, 52.259173, ""),
+    new MarkerClass("Zentrale Gärten", "House of ...", -31.826232, 38.705521, ""),
+    new MarkerClass("Waldgärtlein", "Kids paradice", -51.862924, 25.048828, ""),
 ]
 
   const groups = [
