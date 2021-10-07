@@ -10,8 +10,9 @@
         @click="mapClick"
         @update:zoom="zoomUpdated"
         :class="{ 'to-low': zoomBool }"
+        :worldCopyJump="true"
       >
-        <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true"></l-tile-layer>
+        <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="false" ></l-tile-layer>
         <!-- List of markers -->
         <div v-for="dataMark in dataGroups" :key="dataMark.router">
           <l-marker
