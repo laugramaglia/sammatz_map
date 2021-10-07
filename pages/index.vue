@@ -8,6 +8,8 @@
         :maxZoom="7"
         :maxBoundsViscosity="1.0"
         @click="mapClick"
+        @update:zoom="zoomUpdated"
+        :class="{'to-low': zoomBool}"
       >
         <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true"></l-tile-layer>
         <!-- List of markers -->
@@ -18,9 +20,12 @@
             :key="mark.name"
             :visible="dataMark.visible"
           >
-          <!-- show name always -->
-          <l-tooltip   :options="{permanent: true, className: 'tooltip-custom' }" >{{mark.name}}!</l-tooltip>
-          <!-- custom icon -->
+            <!-- show name always -->
+            <l-tooltip
+              :options="{ permanent: true, className: 'tooltip-custom', offset:[-4,-10], direction: 'bottom' }"
+              >{{ mark.name }}!</l-tooltip
+            >
+            <!-- custom icon -->
             <l-icon
               :icon-size="[22, 37]"
               :icon-anchor="[16, 37]"
@@ -37,43 +42,59 @@
           </l-marker>
         </div>
         <!-- Line path -->
-        <l-polyline
-          :lat-lngs="polylineBlue.latlngs"
-          :color="polylineBlue.color"
+         <l-polyline
+         v-for="lines in paths"
+         :key="lines.color"
+          :lat-lngs="lines.latlngs"
+          :color="lines.color"
+          :visible="lines.visible"
+          :smoothFactor=".1"
+          :opacity=".7"
         ></l-polyline>
-        <l-polyline
-          :lat-lngs="polylineRed.latlngs"
-          :color="polylineRed.color"
-        ></l-polyline>
-        
       </l-map>
     </client-only>
     <!-- bottom right menu -->
-    <FilterBar @onTap="onClickBlue" :groupsFilter="dataGroups" />
+    <Menu @onTapMark="onClickMarks" @onTapPath="onClickPaths" :groupsFilter="dataGroups" :routeFilters="paths" />
   </div>
 </template>
 <script>
-import dataGroups from "../api/data"
-import { bluePath, redPath } from "static/data/path.js"
+import dataGroups from "../api/data";
+import { bluePath, redPath, yellowPath } from "static/data/path.js";
 
 export default {
   data() {
     return {
       colectData: [], // helper
+      zoomBool: false,
       dataGroups,
-      polylineBlue: {
+      paths:[
+         {
+           name: "Arena",
         latlngs: bluePath,
         color: "violet",
+        visible: true
       },
-      polylineRed: {
+       {
+         name: "Campus garten",
         latlngs: redPath,
         color: "orange",
+        visible: true
       },
+       {
+         name: "Waldsee",
+        latlngs: yellowPath,
+        color: "darkred",
+        visible: true
+      }
+      ],
     };
   },
   methods: {
-    onClickBlue(group) {
+    onClickMarks(group) {
       this.dataGroups[group]["visible"] = !this.dataGroups[group]["visible"];
+    },
+    onClickPaths(group) {
+      this.paths[group]["visible"] = !this.paths[group]["visible"];
     },
     mapClick(event) {
       /**
@@ -85,14 +106,36 @@ export default {
       this.colectData.push(coordinates);
       console.log(this.colectData);
     },
+    zoomUpdated(zoom){
+      if (zoom >= 4) {
+          this.zoomBool = false
+        } else {
+          this.zoomBool = true
+        }
+    }
   },
 };
 </script>
 <style lang="scss">
-.tooltip-custom{
-  background-color: rgba($color: white, $alpha: .6) !important;
-  border-radius: 0 ;
-  border: none ;
+.to-low{
+  .tooltip-custom {
+    display: none;
+  }
+}
+.tooltip-custom {
+  background-color: rgba($color: white, $alpha: 0.6) !important;
+  border-radius: 0;
+  border: none;
+  font-weight: bold;
+  padding: 3px;
+  color: rgb(90, 23, 23);
+
+  &.leaflet-tooltip-bottom {
+    &:before {
+      border: none;
+    }
+  }
+
 }
 button.button {
   position: absolute;
