@@ -1178,7 +1178,26 @@ const yellowPath = [
      
 
 ]
+const paths = [
+    {
+      name: "Arena",
+   latlngs: bluePath,
+   color: "violet",
+   visible: true
+ },
+  {
+    name: "Campus garten",
+   latlngs: redPath,
+   color: "orange",
+   visible: true
+ },
+  {
+    name: "Waldsee",
+   latlngs: yellowPath,
+   color: "darkred",
+   visible: true
+ }
+ ]
 
-export { bluePath, redPath, yellowPath }
-
+ export default paths
 

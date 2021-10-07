@@ -1,5 +1,5 @@
-import GroupClass from '../static/classes/groupsClass'
-import MarkerClass from '../static/classes/markerClass'
+import GroupClass from '../classes/groupsClass'
+import MarkerClass from '../classes/markerClass'
 
  const visitUsMarker = [
        new MarkerClass("Cafe", "Take something to go", -36.879621, 45.263672, ""),

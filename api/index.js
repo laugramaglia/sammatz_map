@@ -1,3 +1,4 @@
+/**
 import data from './data'
 
 const bodyParser = require('body-parser')
@@ -10,3 +11,4 @@ app.get(`/${value.name}`, (req, res) => {
 })
 
 export default app
+ */

@@ -58,8 +58,8 @@
   </div>
 </template>
 <script>
-import dataGroups from "../api/data";
-import { bluePath, redPath, yellowPath } from "static/data/path.js";
+import dataGroups from "static/data/marks";
+import paths from "static/data/path.js";
 
 export default {
   data() {
@@ -67,26 +67,7 @@ export default {
       colectData: [], // helper
       zoomBool: false,
       dataGroups,
-      paths:[
-         {
-           name: "Arena",
-        latlngs: bluePath,
-        color: "violet",
-        visible: true
-      },
-       {
-         name: "Campus garten",
-        latlngs: redPath,
-        color: "orange",
-        visible: true
-      },
-       {
-         name: "Waldsee",
-        latlngs: yellowPath,
-        color: "darkred",
-        visible: true
-      }
-      ],
+      paths
     };
   },
   methods: {
