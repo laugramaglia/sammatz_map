@@ -11,9 +11,10 @@ import MarkerClass from '../static/classes/markerClass'
   const arbeitsbereicheMarker = [
     new MarkerClass("Meierei", "Take something to go", -54.585095, 60.930262, ""),
     new MarkerClass("Bäckerei", "Arche farm", -54.684004, 76.484671, ""),
-    // new MarkerClass("Eichenhof", "House of ...", -59.327892, 64.445028, ""),
-    // new MarkerClass("Küche", "Kids paradice", -57.309929, 82.204943, ""),
-
+    new MarkerClass("Eichenhof", "Kitchen", -27.254629577800078, 52.03125, ""),
+    new MarkerClass("Küche", "Laboratory", -37.87485339352928, 38.18847656250001, ""),
+    new MarkerClass("Gemüseacker", "Take something to go", 46.6795944656402, 39.90234375000001, ""),
+    new MarkerClass("Heilpflanzenacker", "Arche farm", 60.13706034449873, 12.615394592285156, ""),
 ]
 
 const gartensMarker = [

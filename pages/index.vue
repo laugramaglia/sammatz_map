@@ -103,8 +103,8 @@ export default {
 
       let coordinates = [event.latlng.lat, event.latlng.lng];
 
-      this.colectData.push(coordinates);
-      console.log(this.colectData);
+      // this.colectData.push(coordinates);
+      console.log(coordinates);
     },
     zoomUpdated(zoom){
       if (zoom >= 4) {
