@@ -40,6 +40,24 @@
           </span>
         </a-menu-item>
       </a-sub-menu>
+
+      <a-sub-menu key="sub3">
+        <span slot="title"
+          ><a-icon type="car" /><span>Parking</span></span
+        >
+        <a-menu-item
+          v-for="(me, index) in parkingFilters"
+          :key="index"
+          @click="onClickParking(index)"
+        >
+          <span>
+            <a-checkbox :checked="me.visible" />
+            <span>{{ me.name }}</span>
+          </span>
+          
+        </a-menu-item>
+      </a-sub-menu>
+
     </a-menu>
   </div>
 </template>
@@ -47,11 +65,12 @@
 export default {
   props: {
     groupsFilter: Array,
-    routeFilters: Array
+    routeFilters: Array,
+    parkingFilters: Array
   },
   data() {
     return {
-      rootSubmenuKeys: ["sub1", "sub2"],
+      rootSubmenuKeys: ["sub1", "sub2", "sub3"],
       openKeys: [],
     };
   },
@@ -71,6 +90,9 @@ export default {
     },
     onClickPath(item){
         this.$emit("onTapPath", item);
+    },
+    onClickParking(item){
+        this.$emit("onTapParking", item);
     }
   },
 };

@@ -9,7 +9,7 @@
         :maxBoundsViscosity="1.0"
         @click="mapClick"
         @update:zoom="zoomUpdated"
-        :class="{'to-low': zoomBool}"
+        :class="{ 'to-low': zoomBool }"
       >
         <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true"></l-tile-layer>
         <!-- List of markers -->
@@ -22,7 +22,12 @@
           >
             <!-- show name always -->
             <l-tooltip
-              :options="{ permanent: true, className: 'tooltip-custom', offset:[-4,-10], direction: 'bottom' }"
+              :options="{
+                permanent: true,
+                className: 'tooltip-custom',
+                offset: [-4, -10],
+                direction: 'bottom',
+              }"
               >{{ mark.name }}!</l-tooltip
             >
             <!-- custom icon -->
@@ -42,24 +47,40 @@
           </l-marker>
         </div>
         <!-- Line path -->
-         <l-polyline
-         v-for="lines in paths"
-         :key="lines.color"
+        <l-polyline
+          v-for="lines in paths"
+          :key="lines.color"
           :lat-lngs="lines.latlngs"
           :color="lines.color"
           :visible="lines.visible"
-          :smoothFactor=".1"
-          :opacity=".7"
+          :smoothFactor="0.1"
+          :opacity="0.7"
         ></l-polyline>
+        <!-- Poligon Parking shapes -->
+        <l-polygon
+          v-for="(poligons, index) in parkingPoligon"
+          :key="index"
+          :lat-lngs="poligons.latlngs"
+          :color="poligons.color"
+          :visible="poligons.visible"
+        ></l-polygon>
       </l-map>
     </client-only>
     <!-- bottom right menu -->
-    <Menu @onTapMark="onClickMarks" @onTapPath="onClickPaths" :groupsFilter="dataGroups" :routeFilters="paths" />
+    <Menu
+      @onTapMark="onClickMarks"
+      @onTapPath="onClickPaths"
+      @onTapParking="onClickParkings"
+      :groupsFilter="dataGroups"
+      :routeFilters="paths"
+      :parkingFilters="parkingPoligon"
+    />
   </div>
 </template>
 <script>
 import dataGroups from "static/data/marks";
 import paths from "static/data/path.js";
+import parkingPoligon from "static/data/poligonSetions.js";
 
 export default {
   data() {
@@ -67,7 +88,8 @@ export default {
       colectData: [], // helper
       zoomBool: false,
       dataGroups,
-      paths
+      paths,
+      parkingPoligon,
     };
   },
   methods: {
@@ -76,6 +98,9 @@ export default {
     },
     onClickPaths(group) {
       this.paths[group]["visible"] = !this.paths[group]["visible"];
+    },
+    onClickParkings(group) {
+      this.parkingPoligon[group]["visible"] = !this.parkingPoligon[group]["visible"];
     },
     mapClick(event) {
       /**
@@ -87,18 +112,21 @@ export default {
       // this.colectData.push(coordinates);
       console.log(coordinates);
     },
-    zoomUpdated(zoom){
+    zoomUpdated(zoom) {
       if (zoom >= 4) {
-          this.zoomBool = false
-        } else {
-          this.zoomBool = true
-        }
-    }
+        this.zoomBool = false;
+      } else {
+        this.zoomBool = true;
+      }
+    },
   },
+  mounted(){
+    console.log(this.parkingPoligon)
+  }
 };
 </script>
 <style lang="scss">
-.to-low{
+.to-low {
   .tooltip-custom {
     display: none;
   }
@@ -116,7 +144,6 @@ export default {
       border: none;
     }
   }
-
 }
 button.button {
   position: absolute;
