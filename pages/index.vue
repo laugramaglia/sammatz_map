@@ -1,31 +1,29 @@
 <template>
-    <client-only>
-      <div class="box-context">
+  <client-only>
+    <div class="box-context">
       <l-map
-        style="height: 100%;"
+        style="height: 100%"
         :center="[-50.466683, 43.683701]"
-        :zoom="4"
-        :minZoom="4"
-        :maxZoom="7"
-        :maxBoundsViscosity="1.0"
+        :zoom="zoomEdited"
+        :minZoom="minZoom"
+        :maxZoom="maxZoom"
+        :maxBoundsViscosity="0.7"
         @click="mapClick"
         @update:zoom="zoomUpdated"
         :class="{ 'to-low': zoomBool }"
-        :fullscreenControl="true"
+        :options="{zoomControl: false}"
       >
-   
-        <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true" ></l-tile-layer>
+        <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true"></l-tile-layer>
 
-        <l-control position="topright" >
-    <Menu
-      @onTapMark="onClickMarks"
-      @onTapPath="onClickPaths"
-      @onTapParking="onClickParkings"
-      :groupsFilter="dataGroups"
-      :routeFilters="paths"
-      :parkingFilters="parkingPoligon"
-    />
-    </l-control>
+        <l-control position="topright">
+          <Menu
+            @onTapMark="onClickMenu"
+            @updateZoom="zooomUpdated"
+            :groupsFilter="dataGroups"
+            :routeFilters="paths"
+            :parkingFilters="parkingPoligon"
+          />
+        </l-control>
 
         <!-- List of markers -->
         <div v-for="dataMark in dataGroups" :key="dataMark.router">
@@ -80,18 +78,20 @@
           :visible="poligons.visible"
         ></l-polygon>
       </l-map>
-      </div>
-    </client-only>
+    </div>
+  </client-only>
 </template>
 <script>
 import dataGroups from "static/data/marks";
 import paths from "static/data/path.js";
 import parkingPoligon from "static/data/poligonSetions.js";
 
-
 export default {
   data() {
     return {
+      minZoom:4,
+      maxZoom:7,
+      zoomEdited: 4,
       colectData: [], // helper
       zoomBool: false,
       dataGroups,
@@ -100,14 +100,18 @@ export default {
     };
   },
   methods: {
-    onClickMarks(group) {
-      this.dataGroups[group]["visible"] = !this.dataGroups[group]["visible"];
+    onClickMenu({itemEmited, groupEmited}) {
+      if (groupEmited === 'mark') this.dataGroups[itemEmited]["visible"] = !this.dataGroups[itemEmited]["visible"];
+
+      if (groupEmited === 'path') this.paths[itemEmited]["visible"] = !this.paths[itemEmited]["visible"];
+    
+      if (groupEmited ==='parking') this.parkingPoligon[itemEmited]["visible"] =
+        !this.parkingPoligon[itemEmited]["visible"];
     },
-    onClickPaths(group) {
-      this.paths[group]["visible"] = !this.paths[group]["visible"];
-    },
-    onClickParkings(group) {
-      this.parkingPoligon[group]["visible"] = !this.parkingPoligon[group]["visible"];
+    zooomUpdated (value) {
+       this.zoomEdited = this.zoomEdited + (value)
+       if(this.zoomEdited <= this.minZoom) this.zoomEdited = this.minZoom
+       if (this.zoomEdited >= this.maxZoom) this.zoomEdited = this.maxZoom
     },
     mapClick(event) {
       /**
@@ -126,11 +130,11 @@ export default {
         this.zoomBool = true;
       }
     },
-  }
+  },
 };
 </script>
 <style lang="scss">
-.box-context{
+.box-context {
   overflow: hidden;
   height: 100vh;
   width: 100vw;

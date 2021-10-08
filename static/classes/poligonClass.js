@@ -11,7 +11,7 @@
 }
 
  class ParkingClass extends PoligonClass{
-    visible = false
+    // visible = false
 
     constructor(cName,cLatLng) {
         super()

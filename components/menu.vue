@@ -13,7 +13,7 @@
         <a-menu-item
           v-for="(me, index) in groupsFilter"
           :key="index"
-          @click="onClickMark(index)"
+          @click="onClickMenus(index, 'mark')"
         >
           <span>
             <a-checkbox :checked="me.visible" />
@@ -27,7 +27,7 @@
         <a-menu-item
           v-for="(me, index) in routeFilters"
           :key="index"
-          @click="onClickPath(index)"
+          @click="onClickMenus(index, 'path')"
         >
           <span>
             <a-checkbox :checked="me.visible" />
@@ -42,22 +42,24 @@
       </a-sub-menu>
 
       <a-sub-menu key="sub3">
-        <span slot="title"
-          ><a-icon type="car" /><span>Parking</span></span
-        >
+        <span slot="title"><a-icon type="car" /><span>Parking</span></span>
         <a-menu-item
           v-for="(me, index) in parkingFilters"
           :key="index"
-          @click="onClickParking(index)"
+          @click="onClickMenus(index, 'parking')"
         >
           <span>
             <a-checkbox :checked="me.visible" />
             <span>{{ me.name }}</span>
           </span>
-          
         </a-menu-item>
       </a-sub-menu>
-
+      <a-menu-item>
+        <a-button-group class="button-box">
+          <a-button icon="minus" @click="zoomControl(-1)" />
+          <a-button icon="plus" @click="zoomControl(1)" />
+        </a-button-group>
+      </a-menu-item>
     </a-menu>
   </div>
 </template>
@@ -66,7 +68,7 @@ export default {
   props: {
     groupsFilter: Array,
     routeFilters: Array,
-    parkingFilters: Array
+    parkingFilters: Array,
   },
   data() {
     return {
@@ -85,14 +87,11 @@ export default {
         this.openKeys = latestOpenKey ? [latestOpenKey] : [];
       }
     },
-    onClickMark(item) {
-      this.$emit("onTapMark", item);
+    onClickMenus(item, group) {
+      this.$emit("onTapMark", { itemEmited: item, groupEmited: group });
     },
-    onClickPath(item){
-        this.$emit("onTapPath", item);
-    },
-    onClickParking(item){
-        this.$emit("onTapParking", item);
+    zoomControl(value){
+       this.$emit("updateZoom", value);
     }
   },
 };
@@ -101,6 +100,21 @@ export default {
 $height-width: 18px;
 .menu-box {
   z-index: 99999;
+  .ant-menu-item.ant-menu-item-selected{
+    background-color: white !important;
+    &::after{
+      display: none;
+    }
+  }
+  .button-box{
+    width: 100%;
+    button{
+      width: 50%;
+      i{
+        margin: 0;
+      }
+    }
+  }
   .marker-line {
     height: $height-width;
     width: $height-width;
