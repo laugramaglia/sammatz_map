@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'MichaelShof-Sammatz',
+    title: 'Michaelshof-Sammatz',
     htmlAttrs: {
       lang: 'en'
     },
@@ -23,7 +23,7 @@ export default {
       {name:'HandheldFriendly', content:'true'},
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/faviconEdited.png' }
     ]
   },
 
