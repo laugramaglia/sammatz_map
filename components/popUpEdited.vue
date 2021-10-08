@@ -20,6 +20,7 @@
 </template>
 <script>
 export default {
+  name:'PopUpEdited',
   props: ["title", "description", "img", "link"],
 };
 </script>

@@ -100,9 +100,6 @@ export default {
 <style lang="scss">
 $height-width: 18px;
 .menu-box {
-  position: fixed;
-  top: 0;
-  right: 0;
   z-index: 99999;
   .marker-line {
     height: $height-width;

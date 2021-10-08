@@ -1,7 +1,8 @@
 <template>
-  <div id="map-wrap" style="height: 100vh; width: 100vw; overflow: hidden">
     <client-only>
+      <div class="box-context">
       <l-map
+        style="height: 100%;"
         :center="[-50.466683, 43.683701]"
         :zoom="4"
         :minZoom="4"
@@ -10,9 +11,22 @@
         @click="mapClick"
         @update:zoom="zoomUpdated"
         :class="{ 'to-low': zoomBool }"
-        
+        :fullscreenControl="true"
       >
+   
         <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true" ></l-tile-layer>
+
+        <l-control position="topright" >
+    <Menu
+      @onTapMark="onClickMarks"
+      @onTapPath="onClickPaths"
+      @onTapParking="onClickParkings"
+      :groupsFilter="dataGroups"
+      :routeFilters="paths"
+      :parkingFilters="parkingPoligon"
+    />
+    </l-control>
+
         <!-- List of markers -->
         <div v-for="dataMark in dataGroups" :key="dataMark.router">
           <l-marker
@@ -66,22 +80,14 @@
           :visible="poligons.visible"
         ></l-polygon>
       </l-map>
+      </div>
     </client-only>
-    <!-- bottom right menu -->
-    <Menu
-      @onTapMark="onClickMarks"
-      @onTapPath="onClickPaths"
-      @onTapParking="onClickParkings"
-      :groupsFilter="dataGroups"
-      :routeFilters="paths"
-      :parkingFilters="parkingPoligon"
-    />
-  </div>
 </template>
 <script>
 import dataGroups from "static/data/marks";
 import paths from "static/data/path.js";
 import parkingPoligon from "static/data/poligonSetions.js";
+
 
 export default {
   data() {
@@ -124,6 +130,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.box-context{
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
 .to-low {
   .tooltip-custom {
     display: none;
