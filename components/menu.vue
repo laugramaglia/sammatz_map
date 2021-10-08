@@ -90,9 +90,9 @@ export default {
     onClickMenus(item, group) {
       this.$emit("onTapMark", { itemEmited: item, groupEmited: group });
     },
-    zoomControl(value){
-       this.$emit("updateZoom", value);
-    }
+    zoomControl(value) {
+      this.$emit("updateZoom", value);
+    },
   },
 };
 </script>
@@ -100,17 +100,17 @@ export default {
 $height-width: 18px;
 .menu-box {
   z-index: 99999;
-  .ant-menu-item.ant-menu-item-selected{
+  .ant-menu-item.ant-menu-item-selected {
     background-color: white !important;
-    &::after{
+    &::after {
       display: none;
     }
   }
-  .button-box{
+  .button-box {
     width: 100%;
-    button{
+    button {
       width: 50%;
-      i{
+      i {
         margin: 0;
       }
     }

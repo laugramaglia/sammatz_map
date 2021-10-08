@@ -11,7 +11,7 @@
         @click="mapClick"
         @update:zoom="zoomUpdated"
         :class="{ 'to-low': zoomBool }"
-        :options="{zoomControl: false}"
+        :options="{ zoomControl: false }"
       >
         <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true"></l-tile-layer>
 
@@ -89,10 +89,9 @@ import parkingPoligon from "static/data/poligonSetions.js";
 export default {
   data() {
     return {
-      minZoom:4,
-      maxZoom:7,
+      minZoom: 4,
+      maxZoom: 7,
       zoomEdited: 4,
-      colectData: [], // helper
       zoomBool: false,
       dataGroups,
       paths,
@@ -100,27 +99,28 @@ export default {
     };
   },
   methods: {
-    onClickMenu({itemEmited, groupEmited}) {
-      if (groupEmited === 'mark') this.dataGroups[itemEmited]["visible"] = !this.dataGroups[itemEmited]["visible"];
+    onClickMenu({ itemEmited, groupEmited }) {
+      if (groupEmited === "mark")
+        this.dataGroups[itemEmited]["visible"] =
+          !this.dataGroups[itemEmited]["visible"];
 
-      if (groupEmited === 'path') this.paths[itemEmited]["visible"] = !this.paths[itemEmited]["visible"];
-    
-      if (groupEmited ==='parking') this.parkingPoligon[itemEmited]["visible"] =
-        !this.parkingPoligon[itemEmited]["visible"];
+      if (groupEmited === "path")
+        this.paths[itemEmited]["visible"] = !this.paths[itemEmited]["visible"];
+
+      if (groupEmited === "parking")
+        this.parkingPoligon[itemEmited]["visible"] =
+          !this.parkingPoligon[itemEmited]["visible"];
     },
-    zooomUpdated (value) {
-       this.zoomEdited = this.zoomEdited + (value)
-       if(this.zoomEdited <= this.minZoom) this.zoomEdited = this.minZoom
-       if (this.zoomEdited >= this.maxZoom) this.zoomEdited = this.maxZoom
+    zooomUpdated(value) {
+      this.zoomEdited = this.zoomEdited + value;
+      if (this.zoomEdited <= this.minZoom) this.zoomEdited = this.minZoom;
+      if (this.zoomEdited >= this.maxZoom) this.zoomEdited = this.maxZoom;
     },
+    /**
+     * Get (lat, lng)
+     */
     mapClick(event) {
-      /**
-       * Get (lat, lng)
-       */
-
       let coordinates = [event.latlng.lat, event.latlng.lng];
-
-      // this.colectData.push(coordinates);
       console.log(coordinates);
     },
     zoomUpdated(zoom) {

@@ -13,6 +13,12 @@ https://github.com/bramus/photoshop-google-maps-tile-cutter/
 
 2) Compress images ( i use [pngyu](https://nukesaq88.github.io/Pngyu/) )
 
+# Edite
+
+## /static/data
+
+### `You can check the markr position in the console`
+
 # Vue
 
 ## Style
