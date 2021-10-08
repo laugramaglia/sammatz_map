@@ -1,5 +1,5 @@
 <template>
-  <div id="map-wrap" style="height: 100vh">
+  <div id="map-wrap" style="height: 100vh; width: 100vw; overflow: hidden">
     <client-only>
       <l-map
         :center="[-50.466683, 43.683701]"
