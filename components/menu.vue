@@ -100,7 +100,7 @@ export default {
 <style lang="scss">
 $height-width: 18px;
 .menu-box {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 99999;

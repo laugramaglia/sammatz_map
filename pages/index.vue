@@ -4,15 +4,15 @@
       <l-map
         :center="[-50.466683, 43.683701]"
         :zoom="4"
-        :minZoom="2"
+        :minZoom="4"
         :maxZoom="7"
         :maxBoundsViscosity="1.0"
         @click="mapClick"
         @update:zoom="zoomUpdated"
         :class="{ 'to-low': zoomBool }"
-        :worldCopyJump="true"
+        
       >
-        <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="false" ></l-tile-layer>
+        <l-tile-layer url="/map/{z}/{x}/{y}.png" :noWrap="true" ></l-tile-layer>
         <!-- List of markers -->
         <div v-for="dataMark in dataGroups" :key="dataMark.router">
           <l-marker
@@ -120,9 +120,6 @@ export default {
         this.zoomBool = true;
       }
     },
-  },
-  mounted(){
-    console.log(this.parkingPoligon)
   }
 };
 </script>
@@ -152,6 +149,9 @@ button.button {
   z-index: 999;
   left: 50%;
   transform: translateX(-50%);
+}
+.leaflet-bottom.leaflet-right {
+  display: none !important;
 }
 </style>
 
