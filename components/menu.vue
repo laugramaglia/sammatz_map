@@ -1,8 +1,13 @@
 <template>
   <div class="menu-box">
+    <div class="button-open-menu" :class="{active: toggleClass}" @click="menuToggle">
+      <a-icon type="menu" size="big" class="icon-menu"/>
+    </div>
     <a-menu
+    id="menu-opened"
       mode="inline"
       :open-keys="openKeys"
+      :class="{active: toggleClass}"
       style="width: 256px"
       @openChange="onOpenChange"
     >
@@ -74,6 +79,7 @@ export default {
     return {
       rootSubmenuKeys: ["sub1", "sub2", "sub3"],
       openKeys: [],
+      toggleClass: false,
     };
   },
   methods: {
@@ -93,11 +99,15 @@ export default {
     zoomControl(value) {
       this.$emit("updateZoom", value);
     },
+    menuToggle(){
+      this.toggleClass = !this.toggleClass
+    }
   },
 };
 </script>
 <style lang="scss">
 $height-width: 18px;
+$button-size: 45px;
 .menu-box {
   z-index: 99999;
   .ant-menu-item.ant-menu-item-selected {
@@ -118,6 +128,39 @@ $height-width: 18px;
   .marker-line {
     height: $height-width;
     width: $height-width;
+  }
+  .button-open-menu{
+    height: $button-size;
+    width: $button-size;
+    background-color: white;
+    margin: 0 0 12px auto;
+    cursor: pointer;
+    border-radius: 4px;
+    opacity: 1;
+    transition: opacity .3s;
+
+    .icon-menu{
+      font-size: 24px;
+      margin: auto;
+      display: block;
+      transform: translateY(40%);
+
+  }
+
+    &.active{
+      opacity: .6;
+    }
+  }
+  #menu-opened{
+    opacity: .4;
+    transform: scale(0);
+    transform-origin: top right;
+    transition:  .3s;
+
+    &.active{
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 </style>
