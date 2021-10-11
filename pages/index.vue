@@ -6,7 +6,6 @@
         <l-map
         ref="map"
         style="height: 100%"
-        
         :zoom="zoomEdited"
         :minZoom="minZoom"
         :maxZoom="maxZoom"
