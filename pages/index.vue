@@ -90,9 +90,9 @@ import parkingPoligon from "static/data/poligonSetions.js";
 export default {
   data() {
     return {
-      minZoom: 3,
+      minZoom: 4,
       maxZoom: 7,
-      zoomEdited: 3,
+      zoomEdited: 4,
       zoomBool: false,
       dataGroups,
       paths,
