@@ -108,6 +108,7 @@ export default {
 <style lang="scss">
 $height-width: 18px;
 $button-size: 45px;
+$border-radius-box: 4px;
 .menu-box {
   z-index: 99999;
   .ant-menu-item.ant-menu-item-selected {
@@ -135,7 +136,7 @@ $button-size: 45px;
     background-color: white;
     margin: 0 0 12px auto;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: $border-radius-box;
     opacity: 1;
     transition: opacity .3s;
 
@@ -156,6 +157,7 @@ $button-size: 45px;
     transform: scale(0);
     transform-origin: top right;
     transition:  .3s;
+    border-radius: $border-radius-box;
 
     &.active{
       transform: scale(1);

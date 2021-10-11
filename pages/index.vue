@@ -7,7 +7,8 @@
         :zoom="zoomEdited"
         :minZoom="minZoom"
         :maxZoom="maxZoom"
-        :maxBoundsViscosity="0.7"
+        :maxBounds="[[79.19388674935426, -135.08171081542972],[-79.15933088881371, 134.91691589355472]]"
+        :maxBoundsViscosity=".4"
         @click="mapClick"
         @update:zoom="zoomUpdated"
         :class="{ 'to-low': zoomBool }"
@@ -89,9 +90,9 @@ import parkingPoligon from "static/data/poligonSetions.js";
 export default {
   data() {
     return {
-      minZoom: 4,
+      minZoom: 3,
       maxZoom: 7,
-      zoomEdited: 4,
+      zoomEdited: 3,
       zoomBool: false,
       dataGroups,
       paths,
@@ -124,6 +125,7 @@ export default {
       console.log(coordinates);
     },
     zoomUpdated(zoom) {
+      if (this.zoomEdited != zoom) this.zoomEdited = zoom
       if (zoom >= 4) {
         this.zoomBool = false;
       } else {
