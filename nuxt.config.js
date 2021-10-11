@@ -13,8 +13,9 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
-
+      
       // Apple app web
+      { name: 'apple-touch-fullscreen', content: 'yes' },
       {name: 'apple-mobile-web-app-capable', content:'yes'},
       {name:'apple-mobile-web-app-status-bar-style', content:'black-translucent'},
 
@@ -27,6 +28,14 @@ export default {
     ]
   },
 
+  /**
+   * To run text on mobile
+   
+  server:{
+    port: 3000,
+    host: '0.0.0.0'
+  },
+  */
 
   // Server middleware
   serverMiddleware: [

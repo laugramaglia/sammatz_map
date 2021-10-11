@@ -1,7 +1,9 @@
 <template>
   <client-only>
+
     <div class="box-context">
-      <l-map
+      
+        <l-map
         style="height: 100%"
         :center="[-50.466683, 43.683701]"
         :zoom="zoomEdited"
@@ -79,7 +81,9 @@
           :visible="poligons.visible"
         ></l-polygon>
       </l-map>
+      
     </div>
+
   </client-only>
 </template>
 <script>
@@ -136,10 +140,13 @@ export default {
 };
 </script>
 <style lang="scss">
+
 .box-context {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
+
+
 }
 .to-low {
   .tooltip-custom {
