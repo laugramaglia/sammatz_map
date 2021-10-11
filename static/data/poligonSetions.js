@@ -44,24 +44,30 @@ const street1ParkingCoordinates = [
     [-60.763687268999405, 75.89115142822267],
     [-60.8601274607222, 74.63871002197267]
 ]
+/*
 const street2ParkingCoordinates = [
     [-53.85252660044952, 74.09179687500001],
 [-53.91728101547621, 73.14697265625001],
 [-56.72862197314074, 74.50927734375001],
 [-56.60788546500924, 75.32226562500001]
 ]
+*/
+/*
 const mainHouse1ParkingCoordinates = [
     [-22.684984142872107, 54.87670898437501],
 [-23.02918734674459, 53.909912109375],
 [-25.18505888358066, 54.27246093750001],
 [-25.055745117015306, 55.23925781250001]
 ]
+*/
+/*
 const mainHouse2ParkingCoordinates = [
     [-28.18684408543942, 57.132468223571784],
     [-28.041493317920267, 58.329977989196784],
     [-22.440027233403118, 57.297263145446784],
     [-22.6226864719147, 56.198630332946784]
 ]
+*/
 
 // Exported list
 const polygon = [
@@ -70,10 +76,10 @@ const polygon = [
     new ParkingClass("parking 3", park3Coordinates),
     new ParkingClass("parking 4", farmParkCoordinates),
     new ParkingClass("parking 5", street1ParkingCoordinates),
-    new ParkingClass("parking 6", street2ParkingCoordinates),
+    // new ParkingClass("parking 6", street2ParkingCoordinates),
     new ParkingClass("parking 7", blueHouseParkCoordinates),
-    new ParkingClass("parking 8", mainHouse1ParkingCoordinates),
-    new ParkingClass("parking 9", mainHouse2ParkingCoordinates),
+    // new ParkingClass("parking 8", mainHouse1ParkingCoordinates),
+    // new ParkingClass("parking 9", mainHouse2ParkingCoordinates),
 ]
 
 export default polygon
