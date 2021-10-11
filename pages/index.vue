@@ -4,8 +4,9 @@
     <div class="box-context">
       
         <l-map
+        ref="map"
         style="height: 100%"
-        :center="[-50.466683, 43.683701]"
+        
         :zoom="zoomEdited"
         :minZoom="minZoom"
         :maxZoom="maxZoom"
@@ -80,8 +81,26 @@
           :color="poligons.color"
           :visible="poligons.visible"
         ></l-polygon>
+
+        <!-- wc toilets marks -->
+        <div v-for="wcItem in wc"
+          :key="wcItem.router">
+        <l-marker
+            v-for="mark in wcItem.markers"
+            :lat-lng="[mark.lat, mark.lng]"
+            :key="mark.name"
+            :visible="wcItem.visible"
+          >
+          <!-- custom icon -->
+            <l-icon
+              :icon-size="[22, 37]"
+              :icon-anchor="[16, 37]"
+              :icon-url="'/markers/' + wcItem.color + '.svg'"
+            >
+            </l-icon></l-marker>
+          </div>
       </l-map>
-      
+    
     </div>
 
   </client-only>
@@ -90,6 +109,7 @@
 import dataGroups from "static/data/marks";
 import paths from "static/data/path.js";
 import parkingPoligon from "static/data/poligonSetions.js";
+import wc from 'static/data/wc.js'
 
 export default {
   data() {
@@ -101,6 +121,7 @@ export default {
       dataGroups,
       paths,
       parkingPoligon,
+      wc
     };
   },
   methods: {
@@ -117,7 +138,7 @@ export default {
           !this.parkingPoligon[itemEmited]["visible"];
     },
     zooomUpdated(value) {
-      this.zoomEdited = this.zoomEdited + value;
+      this.$refs.map.setZoom(this.zoomEdited + value)
       if (this.zoomEdited <= this.minZoom) this.zoomEdited = this.minZoom;
       if (this.zoomEdited >= this.maxZoom) this.zoomEdited = this.maxZoom;
     },
